@@ -27,7 +27,6 @@
 </head>
 <body ng-app="starter">
 <ion-side-menus>
-
     <!-- Center content -->
     <ion-side-menu-content>
         <ion-nav-bar class="bar-positive" align-title="center">
@@ -52,12 +51,27 @@
 
         <!-- Main view content -->
         <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+
+        <div class="tabs tabs-icon-top">
+            <a class="tab-item">
+                <i class="icon ion-home"></i>
+                Home
+            </a>
+            <a class="tab-item">
+                <i class="icon ion-star"></i>
+                Favorites
+            </a>
+            <a class="tab-item">
+                <i class="icon ion-gear-a"></i>
+                Settings
+            </a>
+        </div>
     </ion-side-menu-content>
 
     <!-- Left menu -->
     <ion-side-menu side="left" class="dark-bg">
         <ion-content>
-
             <!-- Search input on head of side menu -->
             <ion-header-bar class="bar bar-light item-input-inset dark-bg">
                 <label class="item-input-wrapper">
@@ -65,14 +79,12 @@
                     <input type="search" placeholder="请输入搜索内容">
                 </label>
             </ion-header-bar>
-
             <!-- Menu -->
             <div class="list" menu-close="">
                 <div class="item item-icon-lef" ui-sref="home">
                     <i class="icon ion-home"></i>
                     Home
                 </div>
-
                 <div class="item item-icon-lef item-divider" ui-sref="category">
                     <i class="icon ion-man"></i>
                     男装
@@ -85,11 +97,8 @@
                     <i class="icon ion-tshirt-outline"></i>
                     皮夹克
                 </div>
-
             </div>
-
         </ion-content>
-
     </ion-side-menu>
 
 </ion-side-menus>
