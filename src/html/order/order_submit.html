@@ -1,62 +1,119 @@
 <ion-view id="order_submit" hide-nav-bar="true" view-title="提交订单">
     <ion-content style="background: #EFF0F2;" class="has-footer">
-        <div class="content">
-            <ion-list>
-                <ion-item style="padding:0;">
-                    <div class="list card " style="padding:0;margin:0;background-color:#EFF0F2;">
-                        <div class="item " style="padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                            <h3>订购地址</h3>
-                        </div>
-                        <div class="item " >
-                            <span style="float:right;color:red;">18812341234</span>
-                            <h2>订购人:xxxx</h2>
-                            <p style="overflow: auto;white-space:normal;">
-                                地址地址</p>
-                        </div>
-                        <div class="item " style="padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                            <h3>订单明细</h3>
-                        </div>
-                        <div ng-repeat="item in cartToOrder">
-                            <div class="item item-thumbnail-left" style="margin-top:5px;">
-                                <img ng-click="showGoodsDetail(item)" image-lazy-src="{{item.image}}" image-lazy-loader="ios">
-                                <div>
-                                    <br/>
-                                    <h2>商品名称</h2>
-                                    <h2>x2</h2><span style="float:right;color:red;font-size:18px;margin-top:-10px;"><span
-                                        style="font-size:14px;">¥ </span>100</span>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item " style="padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                            <h3>选择付款方式</h3>
-                        </div>
-                        <div class="item button-bar" style="padding:20px;">
-                            <a
-                                    style="line-height: 33px;font-size: 14px;" ng-click="payWaySelect(1)"
-                                    ng-class="{1: 'button button-small button-positive col-33', 2 : 'button button-small button-positive button-outline col-33'}[payWay]">微信支付</a>
-                            <a
-                                    style="line-height: 33px;font-size: 14px;" ng-click="payWaySelect(2)"
-                                    ng-class="{2: 'button button-small button-positive col-33', 1 : 'button button-small button-positive button-outline col-33'}[payWay]">货到付款</a>
-
-                        </div>
-                        <div class="item " style="padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                            <h3>订单合计</h3>
-                        </div>
-                        <div class="item">
-                            <h2>商品:<span style="float:right;" class="assertive">¥200</span></h2>
-                            <!--<h2>运费:<span style="float:right;" class="assertive">$10</span></h2>-->
-                        </div>
-                    </div>
-                </ion-item>
-            </ion-list>
+        <div class="card">
+            <div class="item item-divider">
+                收货人信息
+            </div>
+            <div class="item item-text-wrap">
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">收件人</span>
+                        <input type="text" placeholder="请输入姓名">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">电话</span>
+                        <input type="text" placeholder="请输入电话">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">地址</span>
+                        <input type="text" placeholder="请输入详细地址">
+                    </label>
+                </div>
+            </div>
         </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                付款信息
+            </div>
+            <div class="item item-text-wrap">
+                <div class="list">
+
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            支付方式
+                        </div>
+                        <select>
+                            <option>请选择</option>
+                            <option>微信支付（ %6手续费 ）</option>
+                            <option>线下支付</option>
+                        </select>
+                    </label>
+
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            配送方式
+                        </div>
+                        <select>
+                            <option>请选择</option>
+                            <option>顺丰快递</option>
+                            <option>EMS</option>
+                            <option>申通快递</option>
+                            <option>圆通快递</option>
+                        </select>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">发票信息</span>
+                        <input type="text" placeholder="请输入发票信息">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                订单明细
+            </div>
+            <div class="list list-inset">
+                <div class="item">
+                    <span>某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+                <div class="item">
+                    <span>某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+
+                <div class="item">
+                    <span>某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+                <div class="item">
+                    <span>某某商品某某商品某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+                <div class="item ">
+                    <strong>运费</strong>
+                    <span class="item-note">¥700.00</span>
+                </div>
+            </div>
+
+
+        </div>
+
+
     </ion-content>
 
-    <div ng-show="order.status != 'CANCEL'" class="bar bar-footer has-tab-bar-footer">
-        <div class="bottom-buttons" style="width:100%;">
+    <div class="bar bar-footer has-tab-bar-footer" style="padding: 0;">
+        <div class="bottom-buttons" style="width:60%;">
+            <span style="font-size: 16px;line-height: 44px;margin-left: 10px;">总额：
+                <span style="color:red;"> ¥5000.00</span>
+            </span>
+
+
+        </div>
+        <div class="" style="width:40%;">
             <div class="button-bar">
-                <a class="button button-assertive" ng-click="orderSubmit(receive, cartToOrder)">提交订单</a>
+                <a class="button button-assertive" style="line-height: 42px;border-radius: 0;font-size: 18px;">提交订单</a>
             </div>
         </div>
     </div>

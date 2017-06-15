@@ -89,6 +89,44 @@ App.controller("OrderIndexController", ["$scope", "$location", "$ionicPopup", "$
             ]
         },
     ];
+    $scope.goodsList = [
+        {
+            id: 2,
+            name: "Mango shirt",
+            price: 30,
+            sale_price: null,
+            thumb: "img/list/p_2.jpg",
+            images: [
+                "img/detail/d_1.jpg",
+                "img/detail/d_2.jpg",
+                "img/detail/d_3.jpg"
+            ]
+        },
+        {
+            id: 3,
+            name: "Zara shirt",
+            price: 30,
+            sale_price: null,
+            thumb: "img/list/p_3.jpg",
+            images: [
+                "img/detail/d_1.jpg",
+                "img/detail/d_2.jpg",
+                "img/detail/d_3.jpg"
+            ]
+        },
+        {
+            id: 6,
+            name: "Zara shirt",
+            price: 30,
+            sale_price: null,
+            thumb: "img/list/p_6.jpg",
+            images: [
+                "img/detail/d_1.jpg",
+                "img/detail/d_2.jpg",
+                "img/detail/d_3.jpg"
+            ]
+        },
+    ];
 
 }])
     .controller("OrderSubmitController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "OrderService", "ConfigUtil", "StringUtil", function ($scope, $location, $ionicPopup, $ionicLoading, OrderService, ConfigUtil, StringUtil) {

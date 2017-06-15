@@ -1,81 +1,81 @@
-<ion-view id="order" hide-nav-bar="true" view-title="订单详情">
-    <!--<ion-nav-buttons side="left">-->
-    <!--<button class="button button-small button-clear my-back" ng-if="fromCart" ng-click="toMine()">-->
-    <!--<i class="icon ion-chevron-left">返回</i>-->
-    <!--</button>-->
-    <!--</ion-nav-buttons>-->
-    <ion-content style="background: #EFF0F2;" class="has-footer">
-        <div class="content">
-            <ion-list>
-                <ion-item style="padding:0;border-bottom: none;">
-                    <div class="list card " style="padding:0;margin:0;background-color:#EFF0F2;">
-                        <div class="item ">
-                            <span style="float:right;color:red;" ng-bind="order.payStatusName" ng-if="order.orderStatus != 10"></span>
-                            <span style="float:right;color:red;" ng-bind="order.orderStatusName" ng-if="order.orderStatus == 10"></span>
+<ion-view id="order_submit" hide-nav-bar="true" view-title="订单详情">
+    <ion-content style="background: #EFF0F2;">
 
-                            <h2>订单编号:1111111</h2>
-                            <p>2017-06-06</p>
-                        </div>
-                        <div ng-if="order.receiveType == 1">
-                            <div class="item " style="padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                                <h3>收货地址</h3>
-                            </div>
-                            <div class="item ">
-                                <span style="float:right;color:red;">213123123123</span>
-                                <h2>订购人:XXXXX</h2>
-                                <p style="overflow: auto;white-space:normal;">dizhidizhidizhi</p>
-                            </div>
-                        </div>
+        <div class="card">
+            <div class="item item-divider">
+                收货人信息
+            </div>
+            <div class="list">
 
-                        <div ng-if="order.receiveType == 2">
-                            <div class="item " style="padding-top:5px;padding-bottom:5px;margin-top:5px;">
-                                <h3>站点自提</h3>
-                            </div>
-                            <div class="item ">
-                                <h2>站点名称:{{order.siteName}}</h2>
-                                <p style="overflow: auto;white-space:normal;">电话:1288881231</p>
-                                <p style="overflow: auto;white-space:normal;">地址:说的说的发送的仨</p>
-                            </div>
-                        </div>
+                <div class="item ">姓  名： 某某某</div>
+                <div class="item ">电  话： 某某某</div>
+                <div class="item ">地  址： 某某某</div>
 
-                        <div class="item item-thumbnail-left item-icon-right" ng-repeat="goods in order"
-                             style="margin-top:5px;padding-right: 20px;" ng-click="showGoodsDetail(goods)">
-                            <img image-lazy-src="{{goods.imageOut}}" image-lazy-loader="ios">
-                            <div>
-                                <br/>
-                                <h2>商品名称</h2>
-                                <h2>x2</h2><span class="assertive order-goods-amount"><span
-                                    class="font-size-14">¥ </span>700</span>
-                            </div>
-                        </div>
-                        <div class="item item-icon-right" style="background: #EFF0F2; text-align: right;padding-right: 20px;">
-                            <h2 class="assertive">¥ 8000</h2>
-                            <p>共7件商品</p>
-                        </div>
-                    </div>
-                </ion-item>
-            </ion-list>
+            </div>
         </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                付款信息
+            </div>
+            <div class="list">
+
+                <div class="item">
+                    <span>支付方式</span><br/>
+                    <span class="item-note" style="float: left;">微信支付</span>
+                </div>
+
+                <div class="item">
+                    <span>配送方式</span><br/>
+                    <span class="item-note" style="float: left;">顺丰</span>
+                </div>
+
+                <div class="item">
+                    <span>发票信息</span><br/>
+                    <span class="item-note" style="float: left;">阿里巴巴公司发是短发是敌法</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                订单明细
+            </div>
+            <div class="list list-inset">
+                <div class="item">
+                    <span>某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+                <div class="item">
+                    <span>某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+
+                <div class="item">
+                    <span>某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+                <div class="item">
+                    <span>某某商品某某商品某某商品某商品</span>
+                    <span class="item-note">x 2 <span style="color: red;">¥304.00</span></span><br/>
+                    <span class="item-note" style="float: left;">鬼鬼鬼鬼鬼鬼规格规格</span>
+                </div>
+
+                <div class="item ">
+                    <strong>运费</strong>
+                    <span class="item-note">¥700.00</span>
+                </div>
+            </div>
+
+
+        </div>
+
     </ion-content>
-
-    <div ng-show="order.payStatus == 1" ng-cloak class="bar bar-footer has-tab-bar-footer">
-        <!--<div class="bottom-buttons" style="width:100%;">-->
-        <!--<div class="button-bar">-->
-        <!--<a class="button" ng-click="cancelOrder(order)">取消订单</a>-->
-        <!--<a class="button button-assertive" ng-click="pay()">立即付款</a></div>-->
-        <!--</div>-->
-
-        <div class="bottom-buttons" style="width:100%;">
-            <div ng-if="order.orderStatus !=10 && order.payStatus != 3 " class="button-bar">
-                <a class="button button-dark " ng-click="cancelOrder(order)">取消订单</a>
-                <a class="button button-assertive " ng-click="pay()">立即付款</a>
-            </div>
-            <div ng-if="order.orderStatus ==10 " class="button-bar">
-                <a class="button button-assertive" ng-click="deleteOrder(order)">删除订单</a>
-            </div>
-        </div>
-    </div>
-
-
 
 </ion-view>
