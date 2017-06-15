@@ -6,6 +6,7 @@
     <title></title>
 
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/ionic.app.css" rel="stylesheet">
     <link href="http://www.runoob.com/static/ionic/css/ionic.min.css" rel="stylesheet">
 
     <!-- 外网 服务器 -->
@@ -25,6 +26,72 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body ng-app="starter">
-<ion-nav-view></ion-nav-view>
+<ion-side-menus>
+
+    <!-- Center content -->
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive" align-title="center">
+            <!-- Back button -->
+            <ion-nav-back-button>
+                Back
+            </ion-nav-back-button>
+
+            <!-- Burger button -->
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+
+            <!-- Cart button -->
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-bag" ui-sref="goods_cart">
+                    <span class="header-badge">5</span>
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+
+        <!-- Main view content -->
+        <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <!-- Left menu -->
+    <ion-side-menu side="left" class="dark-bg">
+        <ion-content>
+
+            <!-- Search input on head of side menu -->
+            <ion-header-bar class="bar bar-light item-input-inset dark-bg">
+                <label class="item-input-wrapper">
+                    <i class="icon ion-ios-search placeholder-icon"></i>
+                    <input type="search" placeholder="请输入搜索内容">
+                </label>
+            </ion-header-bar>
+
+            <!-- Menu -->
+            <div class="list" menu-close="">
+                <div class="item item-icon-lef" ui-sref="home">
+                    <i class="icon ion-home"></i>
+                    Home
+                </div>
+
+                <div class="item item-icon-lef item-divider" ui-sref="category">
+                    <i class="icon ion-man"></i>
+                    男装
+                </div>
+                <div class="item item-icon-lef" ui-sref="category">
+                    <i class="icon ion-tshirt-outline"></i>
+                    外套
+                </div>
+                <div class="item item-icon-lef" ui-sref="category">
+                    <i class="icon ion-tshirt-outline"></i>
+                    皮夹克
+                </div>
+
+            </div>
+
+        </ion-content>
+
+    </ion-side-menu>
+
+</ion-side-menus>
 </body>
 </html>

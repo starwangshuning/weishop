@@ -1,47 +1,55 @@
-<ion-view  view-title='积分首页' >
+<ion-view id="orders" hide-nav-bar="true" view-title="订单列表">
     <ion-content lazy-scroll>
-        <ion-refresher pulling-text="松开刷新" on-refresh="doRefresh()"></ion-refresher>
+        <ion-refresher
+                pulling-text="松开刷新"
+                on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="content">
+            <ion-list ng-if="orderList != null">
+                <ion-item ng-repeat="order in orderList" style="padding:0;">
+                    <div class="list card order-list-div" style="margin:10px;">
+                        <div class="item" ng-click="showOrder(order)">
+                            <span class="order-pay-status" ng-bind="order.orderStatusName" ng-if="order.orderStatus == 10"></span>
+                            <span class="order-pay-status" ng-bind="order.payStatusName" ng-if="order.orderStatus != 10"></span>
+                            <h2>订单编号:123123123</h2>
+                            <p>2017-09-09</p>
+                        </div>
 
-        <div class="card">
-            <div class="item item-divider">
-                I'm a Header in a Card!
-            </div>
-            <div class="item item-text-wrap">
-                This is a basic Card with some text.
-            </div>
-            <div class="item item-divider">
-                I'm a Footer in a Card!
-            </div>
+                        <div class="item item-thumbnail-left item-icon-right" ng-repeat="goods in order.goodsList"
+                             ng-click="showGoodsDetail(goods)" style="padding-right: 20px;">
+                            <img image-lazy-src="{{goods.imageOut}}" image-lazy-loader="ios">
+                            <div>
+                                <br/>
+                                <h2>商品名称名称名称</h2>
+                                <h2>x1</h2><span class="assertive order-goods-amount"><span
+                                    class="font-size-14">¥ </span>199</span>
+                            </div>
+                        </div>
 
+                        <div class="item ">
+                            <h2>订单金额: <span class="assertive">¥ 199</span></h2>
+                            <p>共3件商品</p>
+                            <div ng-if="order.orderStatus !=10 && order.payStatus != 3 " class="order-button" style="padding-top: 10px;">
+                                <button class="button button-small button-dark icon-right" ng-click="cancelOrder(order)">取消订单</button>
+                                <button class="button button-small button-assertive icon-right" ng-click="payNow(order)">立即付款</button>
+                            </div>
+                            <div ng-if="order.orderStatus ==10 " class="order-button" style="padding-top: 10px;">
+                                <button class="button button-small button-assertive icon-right" ng-click="deleteOrder(order)">删除订单</button>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+            <div ng-if="orderList == null || orderList.length == 0">
+                <div class="card">
+                    <div class="item item-text-wrap">当前订单为空,点击刷新</div>
+                </div>
+                <button class="button button-full button-positive" ng-click="doRefresh()">
+                    刷新
+                </button>
+            </div>
         </div>
-        <div class="card">
-            <div class="item item-divider">
-                I'm a Header in a Card!
-            </div>
-            <div class="item item-text-wrap">
-                This is a basic Card with some text.
-            </div>
-            <div class="item item-divider">
-                I'm a Footer in a Card!
-            </div>
-
-        </div>
-        <div class="card">
-            <div class="item item-divider">
-                I'm a Header in a Card!
-            </div>
-            <div class="item item-text-wrap">
-                This is a basic Card with some text.
-            </div>
-            <div class="item item-divider">
-                I'm a Footer in a Card!
-            </div>
-
-        </div>
-
-        <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="doLoadMore();"></ion-infinite-scroll>
-
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="load_more();">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
-
-

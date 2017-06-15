@@ -66,6 +66,13 @@ var App = angular.module('starter', ['ionic', 'ngResource', 'ngCookies', 'ionicL
                 cache: false
             })
 
+            .state('goods_cart', {
+                url: '/goods_cart',
+                templateUrl: 'goods/goods_cart.html',
+                controller: 'GoodsCartController',
+                cache: false
+            })
+
             .state('order_index', {
                 url: '/order_index',
                 templateUrl: 'order/order_index.html',
@@ -106,7 +113,7 @@ var App = angular.module('starter', ['ionic', 'ngResource', 'ngCookies', 'ionicL
                 cache: false
             });
 
-        $urlRouterProvider.otherwise('/category_index');//默认跳转路径
+        $urlRouterProvider.otherwise('/goods_detail');//默认跳转路径
 
     })
     //拦截器
