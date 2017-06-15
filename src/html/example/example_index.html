@@ -1,0 +1,33 @@
+<ion-view  view-title='积分首页' >
+    <ion-content lazy-scroll>
+        <div style="height: 120px;background: url('img/point/user_bg.png');width: 100%;background-size: cover;">
+            <img ng-click="logoutHandler()" src="img/point/user_image.png" image-lazy-src="http://tp3.sinaimg.cn/1278674074/180/5612859685/0" image-lazy-loader="ios" width="80" height="80" style="float:left;margin: 20px 14px 20px 20px;border-radius: 10px;-webkit-border-radius: 40px;-moz-border-radius: 40px;">
+            <div style="float:left;">
+                <p style="font-size: 16px;color:#282828;margin: 30px 0 0 0;">名字</p>
+                <p style="font-size: 14px;color:#282828;margin: 0;">积分数：<span style="color:#3B7ADB ">111</span></p>
+                <p style="font-size: 14px;color:#898989;margin: 0;">2017.4.1将过期149积分</p>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <ion-refresher pulling-text="松开刷新" on-refresh="doRefresh()"></ion-refresher>
+        <ion-list>
+          <ion-item ng-repeat="data in dataList" style="padding:0;">
+            <div class="item item-body" style="padding:9px 0 0 9px;">
+              <div style="float: left;color:#4A4A4A;font-size: 14px;line-height: 14px;">{{data.monthLabel}}</div>
+              <a class="item item-thumbnail-left" style="float: left;border:none;padding:0 0 15px 100px;">
+                <img src="img/point/point_logo.png" width="90" height="90" style="max-width: 90px;max-height: 90px;top:1px;left:2px;">
+                <p style="margin: 0;font-size: 15px;color:#262626;line-height: 21px;">{{data.pointRuleName}}</p>
+                <div style="margin-top: 9px;">
+                  <p style="margin: 0;">{{data.name}}</p>
+                  <p style="margin: 0;">获取时间：{{data.age}}</p>
+                  <p style="margin: 0;">过期时间：{{data.id}}</p>
+                </div>
+              </a>
+              <div style="color:#FC3342;position: absolute;right: 10px;z-index: 999;">+{{data.amount}}</div>
+            </div>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="doLoadMore();"></ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

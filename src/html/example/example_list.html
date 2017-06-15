@@ -1,0 +1,50 @@
+<ion-view  view-title='积分明细' style="background-color: #EBECEF; ">
+
+  <ion-content >
+
+    <div class="list" style="margin-bottom: 0px;">
+      <label class="item item-input item-select" style="border: none;">
+        <div class="input-label" style="font-size: 15px;color:#4A4A4A;">
+          所有记录
+        </div>
+        <select>
+          <option selected></option>
+          <option>Blue</option>
+          <option>Red</option>
+        </select>
+      </label>
+    </div>
+    <!--<div class="item item-divider" style="background-color: #ffffff;">-->
+      <!--2月-->
+    <!--</div>-->
+    <ion-refresher pulling-text="松开刷新" on-refresh="doRefresh()"></ion-refresher>
+    <ion-list>
+      <ion-item ng-repeat="data in dataList" style="padding:0;">
+        <div class="item item-body" style="padding:15px 0 0 9px;">
+          <div style="float: left;color:#4A4A4A;font-size: 14px;line-height: 14px;">{{data.monthLabel}}</div>
+          <a class="item item-thumbnail-left" style="float: left;border:none;padding:0 0 15px 100px;">
+            <img src="img/point/point_logo.png" width="90" height="90" style="max-width: 90px;max-height: 90px;top:1px;left:2px;">
+            <p style="margin: 0;font-size: 15px;color:#262626;line-height: 21px;">{{data.pointRuleName}}</p>
+            <div style="margin-top: 9px;">
+              <p style="margin: 0;">{{data.appName}}</p>
+              <p style="margin: 0;">获取时间：{{data.tackTime}}</p>
+              <p style="margin: 0;">过期时间：{{data.expireTime}}</p>
+            </div>
+          </a>
+          <div style="color:#FC3342;position: absolute;right: 10px;z-index: 999;">+{{data.amount}}</div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="doLoadMore();"></ion-infinite-scroll>
+    <div ng-if="dataList == null || dataList.length == 0">
+      <div class="card">
+        <div class="item item-text-wrap">当前记录为空,点击刷新</div>
+      </div>
+      <button class="button button-full button-positive" ng-click="doRefresh()">
+        刷新
+      </button>
+    </div>
+  </ion-content>
+
+
+</ion-view>
