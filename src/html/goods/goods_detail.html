@@ -2,89 +2,309 @@
   This template loads for the 'detail' state (app.js)
   'product' is a $scope variable from DetailCtrl
 -->
+
 <ion-view view-title="{{ product.name }}">
     <ion-content class="product-detail has-footer">
-        <!-- Slider using slide box -->
-        <ion-slide-box class="full-image" auto-play="true">
-
-            <ion-slide ng-repeat="image in product.images">
-                <div class="box">
-                    <img class="full-image" src="{{ image }}" alt=""/>
-                </div>
-            </ion-slide>
-
-        </ion-slide-box>
-
         <!-- Choose item option -->
-        <div class="row">
+        <dl class="row tb-prop" style="margin: 0;">
+            <dt style="margin: 10px 10px 0 16px;font-size: 20px;">花色</dt>
+            <dd >
+                <ul>
+                    <li>水云间542-1</li>
+                </ul>
+            </dd>
+        </dl>
+        <div class="item" style="padding-top: 5px;padding-bottom: 5px;">
+            <dl class="row tb-prop">
+                <dt style="margin-top: 10px;margin-right:10px;font-size: 20px;">板材</dt>
+                <dd >
+                    <ul>
+                        <li class="tb-selected">
+                            <a >
+                                <span>割花板</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>割花板</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>割花板</span>
+                            </a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="row tb-prop">
+                <dt  style="margin-top: 10px;margin-right:10px;font-size: 20px;">型号</dt>
+                <dd >
+                    <ul>
+                        <li>
+                            <a>
+                                <span>4*8</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>4*8</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>4*8</span>
+                            </a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
 
-            <div class="col item-input item-options">
-                <select>
-                    <option>Blue</option>
-                    <option selected>Green</option>
-                    <option>Red</option>
-                </select>
-            </div>
+            <dl class="row tb-prop">
+                <dt  style="margin-top: 10px;margin-right:10px;font-size: 20px;">厚度</dt>
+                <dd >
+                    <ul>
+                        <li>
+                            <a>
+                                <span>12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>16</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>18</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>20</span>
+                            </a>
+                        </li>
 
-            <div class="col item-input item-options">
-                <select>
-                    <option>Size S</option>
-                    <option selected>Size M</option>
-                    <option>Size L</option>
-                </select>
-            </div>
+                    </ul>
+                </dd>
+            </dl>
 
+            <dl class="row tb-prop">
+                <dt  style="margin-top: 10px;margin-right:10px;font-size: 20px;">等级</dt>
+                <dd >
+                    <ul>
+                        <li>
+                            <a>
+                                <span>E0</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>E1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl class="row tb-prop">
+                <dt  style="margin-top: 10px;margin-right:10px;font-size: 20px;">钢板</dt>
+                <dd >
+                    <ul>
+                        <li>
+                            <a>
+                                <span>光面</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>亚麻</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span>射线</span>
+                            </a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl class="row tb-prop">
+                <dt  style="margin-top: 10px;margin-right:10px;font-size: 20px;">单双面</dt>
+                <dd >
+                    <ul>
+                        <li>
+                            <a>
+                                <span>单面</span>
+                            </a>
+                        </li>
+                        <li>
+                        <li class="tb-out-of-stock">
+                            <a>
+                                <span>双面</span>
+                            </a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
         </div>
 
+        <dl class="row tb-prop" style="margin: 0;">
+            <dt style="margin: 10px 10px 0 16px;font-size: 20px;">单价</dt>
+            <dd >
+                <ul>
+                    <li style="right: 20px;position: absolute;">
+                        <em class="tm-yen">¥</em>
+                        <span class="tm-price">69.00</span>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+
+
+        <dl class="row item-content" style="margin: 0;">
+            <dt style="margin: 10px 10px 0 16px;font-size: 20px;">数量</dt>
+            <dd >
+                <ul>
+                    <li style="right: 20px;position: absolute; margin-top: 10px;">
+                        <div class="item-amount ">
+                            <a href="#" class="J_Minus minus" ng-click="minus($event)">-</a>
+                            <input id="id-amount" type="number" ng-model="product.amount" class="text text-amount" data-max="99771" data-now="1" autocomplete="off">
+                            <a href="#" class="J_Plus plus" ng-click="plus($event)">+</a>
+                        </div>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+
+
+
         <!-- Add to cart button -->
-        <div class="row add-cart">
+        <div class="row add-cart" style="margin-top: 15px;">
 
             <div class="col">
-                <p class="price dark" ng-if="!product.sale_price">${{ product.price }}</p>
-                <p class="price dark" ng-if="product.sale_price">${{ product.sale_price}}</p>
-                <span class="old-price" ng-if="product.sale_price">${{ product.price }}</span>
+                <button ng-click="buy()" class="button button-block" style="color: #E5511D;border-color: #F0CAB6;background: #FFE4D0;">
+                    <i class="ion-bag"></i>
+                    立即购买
+                </button>
             </div>
 
             <div class="col">
-                <button class="button button-block button-energized">
-                    <i class="ion-bag"></i>
-                    Buy
+                <button ng-click="addCart()" class="button button-block" style="color: #FFF; border-color: #F40; background: #F40;">
+                    <i class="ion-ios-cart"></i>
+                    加入购物车
                 </button>
             </div>
         </div>
 
-        <!-- Description -->
-        <div class="linediv-l"></div>
-        <div class="padding">
-            <h4 class="positive">Description</h4>
-            {{ product.description }}
-        </div>
 
-        <div class="row">
-            <div class="col">
-                <h5 class="positive">Available color</h5>
-                <i class="ion-stop positive"></i>
-                <i class="ion-stop energized"></i>
-                <i class="ion-stop dark"></i>
-            </div>
-            <div class="col">
-                <h5 class="positive">Available size</h5>
-                S, M, L, XL
-            </div>
-        </div>
+        <style>
 
-        <!-- Item -->
-        <div class="item-divider padding">Reviews</div>
-        <div class="list">
-            <div class="item item-avatar" ng-repeat="review in product.reviews">
-                <img src="{{ review.avatar }}" alt=""/>
-                <h2>{{ review.name }}</h2>
-                <p>{{ review.content }}</p>
-                <p>
-                    <i class="ion-android-star" ng-repeat="start in range(review.stars) track by $index"></i>
-                    <i class="ion-android-star-outline" ng-repeat="start in range(5 - review.stars) track by $index"></i>
-                </p>
-            </div>
-        </div>
+            .tb-prop{
+                margin-bottom: 10px;
+            }
+            .tb-prop li{
+                float: left;
+                position: relative;
+                margin: 6px 4px 4px 0;
+                line-height: 35px;
+                vertical-align: middle;
+                padding: 1px;
+                height: 35px;
+                border-radius: 4px;
+            }
+            .tb-prop li a {
+                float: left;
+                background-color: #fff;
+                white-space: nowrap;
+                width: auto!important;
+                min-width: 10px;
+                padding: 0 9px;
+                text-align: center;
+                border: 1px solid #b8b7bd;
+                color: #000;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+           .tb-prop .tb-selected a, #detail .tb-key .tb-prop .tb-selected a:hover{
+                padding: 0px 9px;
+                color: #F40;
+                border: 1px solid #F40;
+                background: #FFF;
+            }
+
+            .tb-prop li.tb-out-of-stock a {
+                border: 1px dashed #D6D6D8;
+                color: #CDCDCD;
+                margin: 0;
+                cursor: not-allowed;
+            }
+            .tm-yen{
+                color: #FF0036;
+                font-size: 18px;
+            }
+            .tm-price{
+                color: #FF0036;
+                font-size: 24px;
+                font-weight: bolder;
+            }
+            .item-content .item-amount a, .item-content .text-amount {
+                float: left;
+            }
+            .item-amount{
+                height: 48px;
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+            }
+            .item-content .item-amount .no-plus, .item-content .item-amount .no-minus {
+                color: #e5e5e5;
+            }
+            /*.item-content .item-amount .minus, .item-content .item-amount .no-minus {*/
+                /*border-right-color: transparent;*/
+                /*left: 0;*/
+            /*}*/
+
+            .item-content .item-amount a {
+                display: block;
+                height: 34px;
+                width: 30px;
+                border: 1px solid #e5e5e5;
+                background: #f0f0f0;
+                text-align: center;
+                line-height: 34px;
+                color: #444;
+                /*position: absolute;*/
+                top: 0;
+            }
+            .item-content .text-amount {
+                border: 1px solid #aaa;
+                text-align: center;
+
+                width: 100px;
+                height: 34px;
+                line-height: 15px;
+                color: #343434;
+                padding: 4px 0;
+                background-color: #fff;
+                background-position: -75px -375px;
+            }
+        </style>
     </ion-content>
 </ion-view>
+
+<div class="tabs tabs-icon-top">
+    <a class="tab-item" ui-sref='goods_index'>
+        <i class="icon ion-home"></i>
+        首页
+    </a>
+    <a class="tab-item">
+        <i class="icon ion-ios-cart"></i>
+        购物车
+    </a>
+    <a class="tab-item">
+        <i class="icon ion-person"></i>
+       个人中心
+    </a>
+</div>

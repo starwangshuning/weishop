@@ -60,7 +60,7 @@ var App = angular.module('starter', ['ionic', 'ngResource', 'ngCookies', 'ionicL
             })
 
             .state('goods_detail', {
-                url: '/goods_detail',
+                url: '/goods_detail/:goodId',
                 templateUrl: 'goods/goods_detail.html',
                 controller: 'GoodsDetailController',
                 cache: false
