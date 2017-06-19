@@ -16,32 +16,31 @@ App.controller("CategoryIndexController", ["$scope", "$location", "$ionicPopup",
         $scope.getList();
     };
 
-    $scope.getList    = function () {
+    $scope.getList = function () {
         $ionicLoading.show();
 
         setTimeout(function () {
             $ionicLoading.hide();
-        },1000);
+        }, 1000);
 
         CategoryService.getAllCategory(
             function (result) {
-            $ionicLoading.hide();
-            $scope.$broadcast("scroll.refreshComplete");
-            $scope.$broadcast("scroll.infiniteScrollComplete");
-            console.log(result);
-            for (var i = 0; i<result.length; i++) {
-                $scope.dataList.push(result[i]);
-            }
+                $ionicLoading.hide();
+                $scope.$broadcast("scroll.refreshComplete");
+                $scope.$broadcast("scroll.infiniteScrollComplete");
+                console.log(result);
+                for (var i = 0; i < result.length; i++) {
+                    $scope.dataList.push(result[i]);
+                }
 
-        });
+            });
     };
 
     $scope.doRefresh();
 
 
-
     // slider images
-    $scope.slides = [
+    $scope.slides   = [
         {
             url: 'img/slide_1.jpg'
         },

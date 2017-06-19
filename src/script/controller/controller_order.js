@@ -5,7 +5,7 @@
  *  积分
  */
 App.controller("OrderIndexController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "OrderService", "ConfigUtil", "StringUtil", function ($scope, $location, $ionicPopup, $ionicLoading, OrderService, ConfigUtil, StringUtil) {
-    document.title = "订单列表";
+    document.title   = "订单列表";
     $scope.orderList = [
         {
             id: 1,
@@ -136,7 +136,7 @@ App.controller("OrderIndexController", ["$scope", "$location", "$ionicPopup", "$
     }])
     .controller("OrderDetailController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "OrderService", "ConfigUtil", "StringUtil", function ($scope, $location, $ionicPopup, $ionicLoading, OrderService, ConfigUtil, StringUtil) {
         document.title = "订单详情";
-        $scope.order = [
+        $scope.order   = [
             {
                 id: 1,
                 name: "Zara shirt",

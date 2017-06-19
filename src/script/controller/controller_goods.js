@@ -1,12 +1,11 @@
-
-App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionicPopup", "$ionicLoading", "GoodsService", "CartService", "ConfigUtil", "StringUtil" , function ($scope, $location, $state, $ionicPopup, $ionicLoading, GoodsService, CartService,ConfigUtil, StringUtil) {
+App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionicPopup", "$ionicLoading", "GoodsService", "CartService", "ConfigUtil", "StringUtil", function ($scope, $location, $state, $ionicPopup, $ionicLoading, GoodsService, CartService, ConfigUtil, StringUtil) {
     document.title = "商品列表";
-    $scope.search = {};
+    $scope.search  = {};
     //排序筛选
-    $scope.sort = function (_this) {
+    $scope.sort    = function (_this) {
         $scope.search.sortName = _this.target.getAttribute('data-name');
-        var sortType = _this.target.getAttribute('data-type');
-        var idName = '#sort-' + $scope.sortName;
+        var sortType           = _this.target.getAttribute('data-type');
+        var idName             = '#sort-' + $scope.sortName;
         if (sortType == 'asc') {
             $scope.search.sortType = 'desc';
             _this.target.setAttribute('data-type', 'desc');
@@ -30,15 +29,15 @@ App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionic
 
     //加入购物车
     $scope.addCart = function (goodId) {
-        // locals.delete('ShoppingCart');
+        // localStorageUtil.delete('ShoppingCart');
         //获取商品详情
-        $scope.product = {};
+        $scope.product        = {};
         $scope.product.goodId = goodId;
         $scope.product.amount = 1;
-        $scope.product.price = 99;
-        $scope.product.name = '商品名称';
+        $scope.product.price  = 99;
+        $scope.product.name   = '商品名称';
 
-        CartService.addShoppingCart($scope.product,function (data) {
+        CartService.addShoppingCart($scope.product, function (data) {
             console.log(data);
         });
     };
@@ -52,13 +51,13 @@ App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionic
 
 }])
 
-    .controller("GoodsDetailController", ["$scope", "$location", "$state", "$ionicPopup", "$ionicLoading", "GoodsService","CartService" ,"ConfigUtil", "StringUtil", function ($scope, $location, $state, $ionicPopup, $ionicLoading, GoodsService, CartService, ConfigUtil, StringUtil) {
-        document.title = "商品详情";
-        $scope.product = {};
+    .controller("GoodsDetailController", ["$scope", "$location", "$state", "$ionicPopup", "$ionicLoading", "GoodsService", "CartService", "ConfigUtil", "StringUtil", function ($scope, $location, $state, $ionicPopup, $ionicLoading, GoodsService, CartService, ConfigUtil, StringUtil) {
+        document.title        = "商品详情";
+        $scope.product        = {};
         $scope.product.goodId = $state.params.goodId;
         $scope.product.amount = 1;
-        $scope.product.price = 99;
-        $scope.product.name = '商品名称';
+        $scope.product.price  = 99;
+        $scope.product.name   = '商品名称';
 
         console.log($scope.product);
         $scope.plus = function (_this) {
@@ -77,7 +76,7 @@ App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionic
 
         //加入购物车
         $scope.addCart = function () {
-            CartService.addShoppingCart($scope.product,function (data) {
+            CartService.addShoppingCart($scope.product, function (data) {
                 console.log(data);
             });
         };
@@ -85,7 +84,7 @@ App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionic
     }])
 
 
-    .controller("GoodsCartController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "GoodsService", "ConfigUtil", "StringUtil", "locals", function ($scope, $location, $ionicPopup, $ionicLoading, GoodsService, ConfigUtil, StringUtil, locals) {
+    .controller("GoodsCartController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "GoodsService", "ConfigUtil", "StringUtil", "localStorageUtil", function ($scope, $location, $ionicPopup, $ionicLoading, GoodsService, ConfigUtil, StringUtil, localStorageUtil) {
         document.title = "购物车";
 
 

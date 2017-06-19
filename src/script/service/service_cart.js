@@ -2,10 +2,10 @@
  * 积分接口
  *
  */
-App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', function ($rootScope, $cookies, $http, locals) {
+App.factory('CartService', ['$rootScope', '$cookies', '$http', 'localStorageUtil', function ($rootScope, $cookies, $http, localStorageUtil) {
 
     function addShoppingCart(product, callBack) {
-        var ShoppingCart = locals.get("ShoppingCart");
+        var ShoppingCart = localStorageUtil.get("ShoppingCart");
         if (ShoppingCart == null || ShoppingCart == "") {
             //第一次加入商品
             var jsonStr = {
@@ -19,9 +19,9 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', functio
                 "totalAmount": (product.price * product.amount)
             };
 
-            locals.set('ShoppingCart', JSON.stringify(jsonStr));
+            localStorageUtil.set('ShoppingCart', JSON.stringify(jsonStr));
         } else {
-            var jsonStr = JSON.parse(ShoppingCart);
+            var jsonStr     = JSON.parse(ShoppingCart);
             var productList = jsonStr.productList;
 
             var result = false;
@@ -29,7 +29,7 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', functio
             for (var i in productList) {
                 if (productList[i].goodId == product.goodId) {
                     productList[i].amount = parseInt(productList[i].amount) + parseInt(product.amount);
-                    result = true;
+                    result                = true;
                     break;
                 }
             }
@@ -47,37 +47,37 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', functio
             jsonStr.totalNumber = parseInt(jsonStr.totalNumber) + parseInt(product.amount);
             jsonStr.totalAmount = parseFloat(jsonStr.totalAmount) + (parseInt(product.amount) * parseFloat(product.price));
             //保存购物车
-            locals.set('ShoppingCart', JSON.stringify(jsonStr));
-            callBack(locals.getObject('ShoppingCart'));
+            localStorageUtil.set('ShoppingCart', JSON.stringify(jsonStr));
+            callBack(localStorageUtil.getObject('ShoppingCart'));
         }
     }
 
     function updateProductNum(goodId, amount, callBack) {
-        var ShoppingCart = locals.get("ShoppingCart");
-        var jsonStr = JSON.parse(ShoppingCart);
-        var productList = jsonStr.productList;
+        var ShoppingCart = localStorageUtil.get("ShoppingCart");
+        var jsonStr      = JSON.parse(ShoppingCart);
+        var productList  = jsonStr.productList;
 
         for (var i in productList) {
             if (productList[i].goodId == goodId) {
-                jsonStr.totalNumber = parseInt(jsonStr.totalNumber) + (parseInt(amount) - parseInt(productList[i].amount));
-                jsonStr.totalAmount = parseFloat(jsonStr.totalAmount) + ((parseInt(amount) * parseFloat(productList[i].price)) - parseInt(productList[i].amount) * parseFloat(productList[i].price));
+                jsonStr.totalNumber   = parseInt(jsonStr.totalNumber) + (parseInt(amount) - parseInt(productList[i].amount));
+                jsonStr.totalAmount   = parseFloat(jsonStr.totalAmount) + ((parseInt(amount) * parseFloat(productList[i].price)) - parseInt(productList[i].amount) * parseFloat(productList[i].price));
                 productList[i].amount = parseInt(amount);
                 utils.setParam("ShoppingCart", JSON.stringify(jsonStr));
                 return;
             }
         }
-        callBack(locals.getObject('ShoppingCart'));
+        callBack(localStorageUtil.getObject('ShoppingCart'));
     }
 
     function getProductList(callBack) {
-        callBack(locals.getObject('ShoppingCart'));
+        callBack(localStorageUtil.getObject('ShoppingCart'));
     }
 
-    function existProduct(goodId , callBack) {
-        var ShoppingCart = locals.get("ShoppingCart");
-        var jsonStr = JSON.parse(ShoppingCart);
-        var productList = jsonStr.productList;
-        var result = false;
+    function existProduct(goodId, callBack) {
+        var ShoppingCart = localStorageUtil.get("ShoppingCart");
+        var jsonStr      = JSON.parse(ShoppingCart);
+        var productList  = jsonStr.productList;
+        var result       = false;
         for (var i in productList) {
             if (productList[i].goodId == goodId) {
                 result = true;
@@ -87,10 +87,10 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', functio
     }
 
     function deleteProduct(goodId, callBack) {
-        var ShoppingCart = locals.get("ShoppingCart");
-        var jsonStr = JSON.parse(ShoppingCart);
-        var productList = jsonStr.productList;
-        var list = [];
+        var ShoppingCart = localStorageUtil.get("ShoppingCart");
+        var jsonStr      = JSON.parse(ShoppingCart);
+        var productList  = jsonStr.productList;
+        var list         = [];
         for (var i in productList) {
             if (productList[i].goodId == goodId) {
                 jsonStr.totalNumber = parseInt(jsonStr.totalNumber) - parseInt(productList[i].num);
@@ -101,7 +101,7 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', functio
         }
         jsonStr.productList = list;
 
-        callBack(locals.getObject('ShoppingCart'));
+        callBack(localStorageUtil.getObject('ShoppingCart'));
     }
 
     return {
@@ -114,16 +114,16 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'locals', functio
             updateProductNum(goodId, amount, callBack);
         },
         //获取购物车中的所有商品
-        getProductList: function ( callBack) {
+        getProductList: function (callBack) {
             getProductList(callBack);
         },
         //判断购物车中是否存在商品
-        existProduct: function ( goodId , callBack) {
-            existProduct(goodId,callBack);
+        existProduct: function (goodId, callBack) {
+            existProduct(goodId, callBack);
         },
         //删除购物车中商品
         deleteProduct: function (goodId, callBack) {
-            deleteProduct(goodId,callBack);
+            deleteProduct(goodId, callBack);
         }
 
     }

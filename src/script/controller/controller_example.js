@@ -35,7 +35,7 @@ App.controller("ExampleIndexController", ["$scope", "$location", "$ionicPopup", 
 
         setTimeout(function () {
             $ionicLoading.hide();
-        },1000);
+        }, 1000);
 
         ExampleService.getExampleDetailWithHomeByCustomerId({
             pageSize: $scope.pageSize,
@@ -45,16 +45,16 @@ App.controller("ExampleIndexController", ["$scope", "$location", "$ionicPopup", 
             $scope.$broadcast("scroll.refreshComplete");
             $scope.$broadcast("scroll.infiniteScrollComplete");
             console.log(result);
-            for (var i = 0; i<result.length; i++) {
+            for (var i = 0; i < result.length; i++) {
                 $scope.dataList.push(result[i]);
             }
 
         });
     };
 
-    $scope.moreDataCanBeLoaded = function(){
+    $scope.moreDataCanBeLoaded = function () {
 
-        if ( 1 || $scope.pageNow < $scope.pageTotal ) {//判断如果当前页没达到总页数，那么可以进行上拉加载
+        if (1 || $scope.pageNow < $scope.pageTotal) {//判断如果当前页没达到总页数，那么可以进行上拉加载
             return true;
         } else {
             return false;
