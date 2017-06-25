@@ -1,6 +1,6 @@
 <ion-view   >
     <ion-content lazy-scroll>
-        <div class="bar bar-header item-input-inset" style="margin-top: 45px;">
+        <div class="bar bar-header item-input-inset" >
             <label class="item-input-wrapper">
                 <i class="icon ion-ios-search placeholder-icon"></i>
                 <input type="search" ng-model="search.searchName" placeholder="请输入搜索内容">
@@ -30,17 +30,17 @@
 
             <div class="item item-icon-left item-icon-right" style="padding-left:16px;" >
                 <span ng-click="detail(1)">肉肉花盆陶瓷特价多肉花盆大小多肉植物花盆创意复古中国风粗陶罐</span>
-                <a href="javascript:void(0)"  ng-click="addCart(1)"><i class="icon ion-ios-cart-outline" style="right:16px;"></i></a>
+                <a href="javascript:void(0)" ng-click="addCart({goodId:1,name:'肉植物1',price:1})"><i class="icon ion-ios-cart-outline" style="right:16px;"></i></a>
             </div>
 
             <div class="item item-icon-left item-icon-right" style="padding-left:16px;" >
                 <span ng-click="detail(2)">肉肉花盆陶瓷特价多肉花盆大小多肉植物花盆创意复古中国风粗陶罐</span>
-                <a href="javascript:void(0)"  ng-click="addCart(2)"><i class="icon ion-ios-cart-outline" style="right:16px;"></i></a>
+                <a href="javascript:void(0)"  ng-click="addCart({goodId:2,name:'肉植物2',price:2})"><i class="icon ion-ios-cart-outline" style="right:16px;"></i></a>
             </div>
 
             <div class="item item-icon-left item-icon-right" style="padding-left:16px;" >
                 <span ng-click="detail(3)">肉肉花盆陶瓷特价多肉花盆大小多肉植物花盆创意复古中国风粗陶罐</span>
-                <a href="javascript:void(0)"  ng-click="addCart(3)"><i class="icon ion-ios-cart-outline" style="right:16px;"></i></a>
+                <a href="javascript:void(0)"  ng-click="addCart({goodId:3,name:'肉植物3',price:3})"><i class="icon ion-ios-cart-outline" style="right:16px;"></i></a>
             </div>
 
         </div>
@@ -52,20 +52,24 @@
             color: #387ef5;
         }
     </style>
+
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ui-sref='goods_index'>
+            <i class="icon ion-home"></i>
+            首页
+        </a>
+        <a class="tab-item" ui-sref='goods_cart'>
+
+            <i class="icon ion-ios-cart"></i>
+            购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-person"></i>
+            个人中心
+        </a>
+    </div>
+
 </ion-view>
 
-<div class="tabs tabs-icon-top">
-    <a class="tab-item" ui-sref='goods_index'>
-        <i class="icon ion-home"></i>
-        首页
-    </a>
-    <a class="tab-item">
-        <i class="icon ion-ios-cart"></i>
-        购物车
-    </a>
-    <a class="tab-item">
-        <i class="icon ion-person"></i>
-        个人中心
-    </a>
-</div>
+
 

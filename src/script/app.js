@@ -113,7 +113,7 @@ var App = angular.module('starter', ['ionic', 'ngResource', 'ngCookies', 'ionicL
                 cache: false
             });
 
-        $urlRouterProvider.otherwise('/goods_detail');//默认跳转路径
+        $urlRouterProvider.otherwise('/goods_index');//默认跳转路径
 
     })
     //拦截器

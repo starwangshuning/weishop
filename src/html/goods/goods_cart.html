@@ -2,93 +2,200 @@
   This template loads for the 'dcart' state (app.js)
 -->
 <ion-view view-title="Cart">
-    <ion-content class="cart has-footer">
-        <div class="list">
-            <div class="item item-thumbnail-left">
-                <img src="img/thumb/p_4.jpg" alt=""/>
-                <h2 class="positive">Zara shirt</h2>
-                <div>
-                    <i class="ion-stop positive"></i>
-                    M
-                    <div class="col">
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
-                        <a href="#" class="trash">
-                            <i class="ion-trash-a"></i>
-                        </a>
-                        <div class="pull-right">
-                            $10
-                        </div>
+    <ion-content class="cart has-footer" >
+        <div class="list" ng-if="shoppingCart.totalNumber">
+
+            <div class="item" ng-repeat="item in shoppingCart.productList" >
+                <div class="row item-content" style="margin-top: -5px;margin-bottom: 10px;">
+                    <div style="font-size: small;font-weight: 500;">
+                        <div style="width: 100px;position: absolute;overflow: hidden;text-overflow:ellipsis;">{{item.name}}</div>
+                        <em class="J_Price price-now" style="position: absolute;left: 40%;" tabindex="0">￥{{item.price}}</em>
+                    </div>
+                    <div>
+                        <ul>
+                            <li style="right: 50px;position: absolute;">
+                                <div class="item-amount ">
+                                    <a href="javascript:void(0)"  class="J_Minus minus" ng-click="minus($event,{{item}})">-</a>
+                                    <input  type="number" ng-model="item.amount"
+                                           class="text text-amount" data-max="99771" data-now="1" autocomplete="off">
+                                    <a href="javascript:void(0)" class="J_Plus plus" ng-click="plus($event,{{item}})">+</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <i style="right: 15px;position: absolute;" class="ion-trash-a" ng-click="delGood('{{item.goodId}}')"></i>
                     </div>
                 </div>
             </div>
 
 
-            <div class="item item-thumbnail-left">
-                <img src="img/thumb/p_5.jpg" alt=""/>
-                <h2 class="positive">Zara shirt</h2>
-                <div>
-                    <i class="ion-stop energized"></i>
-                    M
-                    <div class="col">
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
-                        <a href="#" class="trash">
-                            <i class="ion-trash-a"></i>
-                        </a>
-                        <div class="pull-right">
-                            $20
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
-            <div class="item item-thumbnail-left">
-                <img src="img/thumb/p_3.jpg" alt=""/>
-                <h2 class="positive">Zara shirt</h2>
-                <div>
-                    <i class="ion-stop dark"></i>
-                    M
-                    <div class="col">
-                        <select>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
-                        <a href="#" class="trash">
-                            <i class="ion-trash-a"></i>
-                        </a>
-                        <div class="pull-right">
-                            $10
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="item item-thumbnail-left">-->
+            <!--<img src="img/thumb/p_4.jpg" alt=""/>-->
+            <!--<h2 class="positive">Zara shirt</h2>-->
+            <!--<div>-->
+            <!--<i class="ion-stop positive"></i>-->
+            <!--M-->
+            <!--<div class="col">-->
+            <!--<select>-->
+            <!--<option>1</option>-->
+            <!--<option>2</option>-->
+            <!--<option>3</option>-->
+            <!--</select>-->
+            <!--<a href="#" class="trash">-->
+            <!--<i class="ion-trash-a"></i>-->
+            <!--</a>-->
+            <!--<div class="pull-right">-->
+            <!--$10-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
 
             <!-- Calculate price -->
             <div class="item stable-bg">
-                <span>Shipping</span>
-                <div class="pull-right">$6</div>
+                <span>数量</span>
+                <div class="pull-right">{{shoppingCart.totalNumber}}</div>
             </div>
             <div class="item stable-bg">
-                <b>Total</b>
-                <div class="pull-right">$46</div>
+                <b>总计</b>
+                <div class="pull-right">{{shoppingCart.totalAmount}}</div>
             </div>
         </div>
 
         <!-- Checkout button -->
-        <div class="padding">
+        <div class="padding" ng-if="shoppingCart.totalNumber">
             <button class="button button-block button-energized" ui-sref="order_submit">
                 结算
             </button>
         </div>
-
+        <div class="padding" style="text-align: center;" ng-if="!shoppingCart.totalNumber">
+            购物车空空如也~
+        </div>
     </ion-content>
+
+
+
+    <style>
+
+
+        .tb-prop {
+            margin-bottom: 10px;
+        }
+
+        .tb-prop li {
+            float: left;
+            position: relative;
+            margin: 6px 4px 4px 0;
+            line-height: 35px;
+            vertical-align: middle;
+            padding: 1px;
+            height: 35px;
+            border-radius: 4px;
+        }
+
+        .tb-prop li a {
+            float: left;
+            background-color: #fff;
+            white-space: nowrap;
+            width: auto !important;
+            min-width: 10px;
+            padding: 0 9px;
+            text-align: center;
+            border: 1px solid #b8b7bd;
+            color: #000;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .tb-prop .tb-selected a, #detail .tb-key .tb-prop .tb-selected a:hover {
+            padding: 0px 9px;
+            color: #F40;
+            border: 1px solid #F40;
+            background: #FFF;
+        }
+
+        .tb-prop li.tb-out-of-stock a {
+            border: 1px dashed #D6D6D8;
+            color: #CDCDCD;
+            margin: 0;
+            cursor: not-allowed;
+        }
+
+        .tm-yen {
+            color: #FF0036;
+            font-size: 18px;
+        }
+
+        .tm-price {
+            color: #FF0036;
+            font-size: 24px;
+            font-weight: bolder;
+        }
+
+        .item-content .item-amount a, .item-content .text-amount {
+            float: left;
+        }
+
+        .item-amount {
+            height: 48px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .item-content .item-amount .no-plus, .item-content .item-amount .no-minus {
+            color: #e5e5e5;
+        }
+
+        /*.item-content .item-amount .minus, .item-content .item-amount .no-minus {*/
+        /*border-right-color: transparent;*/
+        /*left: 0;*/
+        /*}*/
+
+        .item-content .item-amount a {
+            display: block;
+            height: 20px;
+            width: 20px;
+            border: 1px solid #e5e5e5;
+            background: #f0f0f0;
+            text-align: center;
+            line-height: 20px;
+            color: #444;
+            /*position: absolute;*/
+            top: 0;
+            text-decoration: none;
+        }
+
+        .item-content .text-amount {
+            border: 1px solid #aaa;
+            text-align: center;
+            width: 50px;
+            height: 20px;
+            line-height: 15px;
+            color: #343434;
+            padding: 4px 0;
+            background-color: #fff;
+            background-position: -75px -375px;
+        }
+
+    </style>
+
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ui-sref='goods_index'>
+            <i class="icon ion-home"></i>
+            首页
+        </a>
+        <a class="tab-item" ui-sref='goods_cart'>
+            <i class="icon ion-ios-cart"></i>
+            购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-person"></i>
+            个人中心
+        </a>
+    </div>
+
 </ion-view>
+
+

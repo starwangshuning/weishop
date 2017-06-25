@@ -1,11 +1,39 @@
 App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionicPopup", "$ionicLoading", "GoodsService", "CartService", "ConfigUtil", "StringUtil", function ($scope, $location, $state, $ionicPopup, $ionicLoading, GoodsService, CartService, ConfigUtil, StringUtil) {
     document.title = "商品列表";
-    $scope.search  = {};
+    $scope.search       = {};
+    $scope.shoppingCart = {};//购物车列表
+    $scope.productList  = {};//商品列表
+
+
+    //获取商品列表
+    // GoodsService.getList(function (data) {
+    //     $scope.productList = data;
+    // });
+
+    //获取购物车信息
+    CartService.getProductList(function (data) {
+        if(data){
+            $scope.shoppingCart = data;
+        }
+        if (!$scope.shoppingCart.totalNumber) {
+            $scope.shoppingCart.totalNumber = 0;
+        }
+    });
+
+    //加入购物车
+    $scope.addCart = function (product) {
+        product.amount = 1;
+        CartService.addShoppingCart(product, function (data) {
+            $scope.shoppingCart = data;
+            console.log($scope.shoppingCart);
+        });
+    };
+
     //排序筛选
-    $scope.sort    = function (_this) {
+    $scope.sort = function (_this) {
         $scope.search.sortName = _this.target.getAttribute('data-name');
-        var sortType           = _this.target.getAttribute('data-type');
-        var idName             = '#sort-' + $scope.sortName;
+        var sortType = _this.target.getAttribute('data-type');
+        var idName = '#sort-' + $scope.search.sortName;
         if (sortType == 'asc') {
             $scope.search.sortType = 'desc';
             _this.target.setAttribute('data-type', 'desc');
@@ -27,20 +55,6 @@ App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionic
     };
 
 
-    //加入购物车
-    $scope.addCart = function (goodId) {
-        // localStorageUtil.delete('ShoppingCart');
-        //获取商品详情
-        $scope.product        = {};
-        $scope.product.goodId = goodId;
-        $scope.product.amount = 1;
-        $scope.product.price  = 99;
-        $scope.product.name   = '商品名称';
-
-        CartService.addShoppingCart($scope.product, function (data) {
-            console.log(data);
-        });
-    };
 
     //商品详情
     $scope.detail = function (goodId) {
@@ -52,40 +66,109 @@ App.controller("GoodsIndexController", ["$scope", "$location", "$state", "$ionic
 }])
 
     .controller("GoodsDetailController", ["$scope", "$location", "$state", "$ionicPopup", "$ionicLoading", "GoodsService", "CartService", "ConfigUtil", "StringUtil", function ($scope, $location, $state, $ionicPopup, $ionicLoading, GoodsService, CartService, ConfigUtil, StringUtil) {
-        document.title        = "商品详情";
-        $scope.product        = {};
-        $scope.product.goodId = $state.params.goodId;
-        $scope.product.amount = 1;
-        $scope.product.price  = 99;
-        $scope.product.name   = '商品名称';
+        document.title = "商品详情";
+        $scope.shoppingCart   = {};
+        $scope.productDetail  = {};//商品详情
+        $scope.productDetail.amount = 1;
+        $scope.productDetail.price  = 100;
+        $scope.productDetail.name  = '植物';
+        $scope.productDetail.goodId  = $state.params.goodId;
 
-        console.log($scope.product);
+        $scope.goodId = $state.params.goodId;
+
+        CartService.getProductList(function (data) {
+            if(data){
+                $scope.shoppingCart = data;
+            }
+            if (!$scope.shoppingCart.totalNumber) {
+                $scope.shoppingCart.totalNumber = 0;
+            }
+        });
+        console.log($scope.shoppingCart);
+
+        //获取商品详情
+        // GoodsService.getList( $scope.goodId , function (data) {
+        //     $scope.productDetail = data;
+        // });
+
         $scope.plus = function (_this) {
-            $scope.product.amount += 1;
+            $scope.productDetail.amount += 1;
+            if ($scope.productDetail.amount > 1) {
+                $(_this.target).prev().prev().removeClass('no-minus').addClass('minus');
+            }
         };
 
         $scope.minus = function (_this) {
-            if ($scope.product.amount == 0) {
-                return 0;
+            if ($scope.productDetail.amount == 1) {
+                return false;
             }
-            $scope.product.amount -= 1;
-            if ($scope.product.amount == 0) {
+            $scope.productDetail.amount -= 1;
+            if ($scope.productDetail.amount == 1) {
                 $(_this.target).removeClass('minus').toggleClass('no-minus');
             }
         };
 
         //加入购物车
-        $scope.addCart = function () {
-            CartService.addShoppingCart($scope.product, function (data) {
-                console.log(data);
+        $scope.addCart = function (product) {
+            CartService.addShoppingCart(product, function (data) {
+                $scope.shoppingCart = data;
             });
         };
+
+        $scope.buy = function (product) {
+            CartService.addShoppingCart(product, function (data) {
+                $scope.shoppingCart = data;
+            });
+            $state.go('order_submit');
+
+        }
 
     }])
 
 
-    .controller("GoodsCartController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "GoodsService", "ConfigUtil", "StringUtil", "localStorageUtil", function ($scope, $location, $ionicPopup, $ionicLoading, GoodsService, ConfigUtil, StringUtil, localStorageUtil) {
+    .controller("GoodsCartController", ["$scope", "$location", "$ionicPopup", "$ionicLoading", "GoodsService", "CartService", "ConfigUtil", "StringUtil", "localStorageUtil", function ($scope, $location, $ionicPopup, $ionicLoading, GoodsService, CartService, ConfigUtil, StringUtil, localStorageUtil) {
         document.title = "购物车";
+        $scope.shoppingCart = {};
+        // localStorage.clear();
+        CartService.getProductList(function (data) {
+            if(data){
+                $scope.shoppingCart = data;
+            }
+            if (!$scope.shoppingCart.totalNumber) {
+                $scope.shoppingCart.totalNumber = 0;
+            }
+        });
 
+        console.log($scope.shoppingCart);
+
+        $scope.delGood = function (goodId) {
+            CartService.deleteProduct(goodId, function (data) {
+                $scope.shoppingCart = data;
+            })
+        };
+
+
+        $scope.plus = function (_this, product) {
+            product.amount = 1;
+            if (product.amount > 1) {
+                $(_this.target).prev().prev().removeClass('no-minus').addClass('minus');
+            }
+            CartService.addShoppingCart(product, function (data) {
+                $scope.shoppingCart = data;
+            });
+        };
+
+        $scope.minus = function (_this, product) {
+            if (product.amount == 1) {
+                return false;
+            }
+            product.amount -= 1;
+            if (product.amount == 1) {
+                $(_this.target).removeClass('minus').toggleClass('no-minus');
+            }
+            CartService.updateProductNum(product.goodId, product.amount, function (data) {
+                $scope.shoppingCart = data;
+            })
+        };
 
     }]);

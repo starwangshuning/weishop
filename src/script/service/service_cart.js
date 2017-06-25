@@ -6,7 +6,7 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'localStorageUtil
 
     function addShoppingCart(product, callBack) {
         var ShoppingCart = localStorageUtil.get("ShoppingCart");
-        if (ShoppingCart == null || ShoppingCart == "") {
+        if (ShoppingCart == null || ShoppingCart == "" || ShoppingCart == false) {
             //第一次加入商品
             var jsonStr = {
                 "productList": [{
@@ -44,12 +44,12 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'localStorageUtil
                 });
             }
             //重新计算总价
-            jsonStr.totalNumber = parseInt(jsonStr.totalNumber) + parseInt(product.amount);
-            jsonStr.totalAmount = parseFloat(jsonStr.totalAmount) + (parseInt(product.amount) * parseFloat(product.price));
+            jsonStr.totalNumber = parseInt(Number(jsonStr.totalNumber)) + parseInt(product.amount);
+            jsonStr.totalAmount = parseFloat(Number(jsonStr.totalAmount)) + (parseInt(product.amount) * parseFloat(product.price));
             //保存购物车
             localStorageUtil.set('ShoppingCart', JSON.stringify(jsonStr));
-            callBack(localStorageUtil.getObject('ShoppingCart'));
         }
+        callBack(localStorageUtil.getObject('ShoppingCart'));
     }
 
     function updateProductNum(goodId, amount, callBack) {
@@ -62,8 +62,8 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'localStorageUtil
                 jsonStr.totalNumber   = parseInt(jsonStr.totalNumber) + (parseInt(amount) - parseInt(productList[i].amount));
                 jsonStr.totalAmount   = parseFloat(jsonStr.totalAmount) + ((parseInt(amount) * parseFloat(productList[i].price)) - parseInt(productList[i].amount) * parseFloat(productList[i].price));
                 productList[i].amount = parseInt(amount);
-                utils.setParam("ShoppingCart", JSON.stringify(jsonStr));
-                return;
+                localStorageUtil.set("ShoppingCart", JSON.stringify(jsonStr));
+                break;
             }
         }
         callBack(localStorageUtil.getObject('ShoppingCart'));
@@ -93,14 +93,14 @@ App.factory('CartService', ['$rootScope', '$cookies', '$http', 'localStorageUtil
         var list         = [];
         for (var i in productList) {
             if (productList[i].goodId == goodId) {
-                jsonStr.totalNumber = parseInt(jsonStr.totalNumber) - parseInt(productList[i].num);
-                jsonStr.totalAmount = parseFloat(jsonStr.totalAmount) - parseInt(productList[i].num) * parseFloat(productList[i].price);
+                jsonStr.totalNumber = parseInt(jsonStr.totalNumber) - parseInt(productList[i].amount);
+                jsonStr.totalAmount = parseFloat(jsonStr.totalAmount) - parseInt(productList[i].amount) * parseFloat(productList[i].price);
             } else {
                 list.push(productList[i]);
             }
         }
         jsonStr.productList = list;
-
+        localStorageUtil.set("ShoppingCart", JSON.stringify(jsonStr));
         callBack(localStorageUtil.getObject('ShoppingCart'));
     }
 

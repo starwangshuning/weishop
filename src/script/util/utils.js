@@ -31,6 +31,9 @@ App.factory('logger', [function () {
             },
             delete: function (key) {
                 localStorage.removeItem(key);
+            }, //清空
+            clear :function () {
+                localStorage.clear();
             }
 
         }

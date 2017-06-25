@@ -3,7 +3,7 @@
   'product' is a $scope variable from DetailCtrl
 -->
 
-<ion-view view-title="{{ product.name }}">
+<ion-view view-title="{{ productDetail.name }}">
     <ion-content class="product-detail has-footer">
         <!-- Choose item option -->
         <dl class="row tb-prop" style="margin: 0;">
@@ -156,7 +156,7 @@
                 <ul>
                     <li style="right: 20px;position: absolute;">
                         <em class="tm-yen">¥</em>
-                        <span class="tm-price">69.00</span>
+                        <span class="tm-price">{{productDetail.price}}</span>
                     </li>
                 </ul>
             </dd>
@@ -169,9 +169,9 @@
                 <ul>
                     <li style="right: 20px;position: absolute; margin-top: 10px;">
                         <div class="item-amount ">
-                            <a href="#" class="J_Minus minus" ng-click="minus($event)">-</a>
-                            <input id="id-amount" type="number" ng-model="product.amount" class="text text-amount" data-max="99771" data-now="1" autocomplete="off">
-                            <a href="#" class="J_Plus plus" ng-click="plus($event)">+</a>
+                            <a href="javascript:void(0)" class="J_Minus minus" ng-click="minus($event)">-</a>
+                            <input id="id-amount" type="number" ng-model="productDetail.amount" class="text text-amount" data-max="99771" data-now="1" autocomplete="off">
+                            <a href="javascript:void(0)" class="J_Plus plus" ng-click="plus($event)">+</a>
                         </div>
                     </li>
                 </ul>
@@ -184,14 +184,14 @@
         <div class="row add-cart" style="margin-top: 15px;">
 
             <div class="col">
-                <button ng-click="buy()" class="button button-block" style="color: #E5511D;border-color: #F0CAB6;background: #FFE4D0;">
+                <button ng-click="buy(productDetail)" class="button button-block" style="color: #E5511D;border-color: #F0CAB6;background: #FFE4D0;">
                     <i class="ion-bag"></i>
                     立即购买
                 </button>
             </div>
 
             <div class="col">
-                <button ng-click="addCart()" class="button button-block" style="color: #FFF; border-color: #F40; background: #F40;">
+                <button ng-click="addCart(productDetail)" class="button button-block" style="color: #FFF; border-color: #F40; background: #F40;">
                     <i class="ion-ios-cart"></i>
                     加入购物车
                 </button>
@@ -277,6 +277,7 @@
                 color: #444;
                 /*position: absolute;*/
                 top: 0;
+                text-decoration:none;
             }
             .item-content .text-amount {
                 border: 1px solid #aaa;
@@ -292,19 +293,21 @@
             }
         </style>
     </ion-content>
-</ion-view>
 
-<div class="tabs tabs-icon-top">
-    <a class="tab-item" ui-sref='goods_index'>
-        <i class="icon ion-home"></i>
-        首页
-    </a>
-    <a class="tab-item">
-        <i class="icon ion-ios-cart"></i>
-        购物车
-    </a>
-    <a class="tab-item">
-        <i class="icon ion-person"></i>
-       个人中心
-    </a>
-</div>
+
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ui-sref='goods_index'>
+            <i class="icon ion-home"></i>
+            首页
+        </a>
+        <a class="tab-item" ui-sref='goods_cart'>
+            <i class="icon ion-ios-cart"></i>
+            购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-person"></i>
+            个人中心
+        </a>
+    </div>
+
+</ion-view>
