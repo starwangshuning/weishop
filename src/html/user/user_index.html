@@ -1,1 +1,89 @@
 
+<ion-view   hide-nav-bar="false">
+    <ion-content lazy-scroll style="background-color: #EEEEEE;">
+        <div class=""  style="background-image: url(img/back.png);height: 200px;width: 100%;text-align:center" >
+            <img class="avatar" width="80" height="80" src="img/avatar.png">
+            <div class="name">昵称显示</div>
+        </div>
+        <div class="list">
+            <div class="tap-head">全部订单</div>
+
+            <div style="background: #FFFFFF;height: 75px;text-align: center;">
+                <div class="tap-bar">
+                    <img src="img/pay.png"><br>
+                    <span>待付款</span>
+                </div>
+                <div class="tap-bar">
+                    <img src="img/send.png"><br>
+                    <span>待发货</span>
+                </div>
+                <div class="tap-bar">
+                    <img src="img/take.png"><br>
+                    <span>待收货</span>
+                </div>
+                <div class="tap-bar">
+                    <img src="img/list.png"><br>
+                    <span>历史订单</span>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ui-sref='goods_index'>
+            <i class="icon ion-home"></i>
+            首页
+        </a>
+        <a class="tab-item" ui-sref='goods_cart'>
+
+            <i class="icon ion-ios-cart"></i>
+            购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
+        </a>
+        <a class="tab-item">
+            <i class="icon ion-person"></i>
+            个人中心
+        </a>
+    </div>
+    <style>
+        img {
+            vertical-align: middle;
+            border:none;
+        }
+        .avatar {
+             border-radius: 50px;
+             -webkit-border-radius: 50px;
+             -moz-border-radius: 50px;
+            margin-top: 40px;
+            position: relative;
+         }
+        .name{
+            color: white;
+            margin-top: 10px;
+        }
+        .tap-head{
+            height: 35px;
+            line-height: 35px;
+            padding-left: 25px;
+            font-size: 17px;
+            color: #6C6C6C;
+        }
+        .tap-bar{
+            width: 25%;
+            float: left;
+            border-right: 2px solid #F8F8F8;
+            margin-top: 10px;
+        }
+
+        .tap-bar img{
+            width: 30px;
+            height: 30px;
+            /*display: block;*/
+        }
+        .tap-bar sapn{
+            display: block;
+        }
+    </style>
+</ion-view>
+
+
+
