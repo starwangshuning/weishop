@@ -9,19 +9,19 @@
             <div class="tap-head">全部订单</div>
 
             <div style="background: #FFFFFF;height: 75px;text-align: center;">
-                <div class="tap-bar">
+                <div class="tap-bar" ui-sref='order_index'>
                     <img src="img/pay.png"><br>
                     <span>待付款</span>
                 </div>
-                <div class="tap-bar">
+                <div class="tap-bar" ui-sref='order_index'>
                     <img src="img/send.png"><br>
                     <span>待发货</span>
                 </div>
-                <div class="tap-bar">
+                <div class="tap-bar" ui-sref='order_index'>
                     <img src="img/take.png"><br>
                     <span>待收货</span>
                 </div>
-                <div class="tap-bar">
+                <div class="tap-bar" ui-sref='order_index'>
                     <img src="img/list.png"><br>
                     <span>历史订单</span>
                 </div>
@@ -39,7 +39,7 @@
             <i class="icon ion-ios-cart"></i>
             购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
         </a>
-        <a class="tab-item">
+        <a class="tab-item" >
             <i class="icon ion-person"></i>
             个人中心
         </a>

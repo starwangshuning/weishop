@@ -1,4 +1,4 @@
-<ion-view hide-nav-bar="true" view-title='积分首页' >
+<ion-view hide-nav-bar="false" view-title='积分首页' >
     <ion-content lazy-scroll class="has-footer">
         <ion-refresher pulling-text="松开刷新" on-refresh="doRefresh()"></ion-refresher>
             <div class="card" ng-repeat="data in orderList">
@@ -36,19 +36,20 @@
         <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="doLoadMore();"></ion-infinite-scroll>
 
     </ion-content>
-</ion-view>
 
-<div class="tabs tabs-icon-top">
-    <a class="tab-item">
-        <i class="icon ion-home"></i>
-        Home
-    </a>
-    <a class="tab-item">
-        <i class="icon ion-star"></i>
-        Favorites
-    </a>
-    <a class="tab-item">
-        <i class="icon ion-gear-a"></i>
-        Settings
-    </a>
-</div>
+    <div class="tabs tabs-icon-top">
+        <a class="tab-item" ui-sref='goods_index'>
+            <i class="icon ion-home"></i>
+            首页
+        </a>
+        <a class="tab-item" ui-sref='goods_cart'>
+
+            <i class="icon ion-ios-cart"></i>
+            购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
+        </a>
+        <a class="tab-item" ui-sref='user_index'>
+            <i class="icon ion-person"></i>
+            个人中心
+        </a>
+    </div>
+</ion-view>

@@ -1,7 +1,7 @@
 <!--
   This template loads for the 'dcart' state (app.js)
 -->
-<ion-view view-title="Cart">
+<ion-view view-title="购物车">
     <ion-content class="cart has-footer" >
         <div class="list" ng-if="shoppingCart.totalNumber">
 
@@ -190,7 +190,7 @@
             <i class="icon ion-ios-cart"></i>
             购物车(<em style="color: red;">{{shoppingCart.totalNumber}}</em>)
         </a>
-        <a class="tab-item">
+        <a class="tab-item" ui-sref='user_index'>
             <i class="icon ion-person"></i>
             个人中心
         </a>
